@@ -366,6 +366,19 @@ function mainLoop() {
     }
 }
 
+function lifeLoop() {
+	let weak = false
+	if(typeof calcHDratio !== 'undefined') weak = calcHDratio() > 1
+	if(checkForLiving() && weak) {
+		mapsClicked()
+	}
+}
+
+function checkForLiving() {
+	let badGuy = document.getElementById("badGuyName").innerText
+	return badGuy.substring(0,6) === 'Living'
+}
+
 function guiLoop() {
     updateCustomButtons(), safeSetItems('storedMODULES', JSON.stringify(compareModuleVars())), getPageSetting('EnhanceGrids') && MODULES.fightinfo.Update(), 'undefined' != typeof MODULES && 'undefined' != typeof MODULES.performance && MODULES.performance.isAFK && MODULES.performance.UpdateAFKOverlay()
 }
