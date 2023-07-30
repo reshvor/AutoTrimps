@@ -180,7 +180,7 @@ function mainLoop() {
             setScienceNeeded();
             autoLevelEquipment();
         }
-        
+        lifeLoop();
         //Heirloom Shield Swap Check
 		if (shieldEquipped !== game.global.ShieldEquipped.id) HeirloomShieldSwapped();
 
@@ -367,16 +367,16 @@ function mainLoop() {
 }
 
 function lifeLoop() {
-	let weak = false
-	if(typeof calcHDratio !== 'undefined') weak = calcHDratio() > 1
+	let weak = false;
+	if(typeof calcHDratio !== 'undefined') weak = calcHDratio() > 1;
 	if(checkForLiving() && weak) {
-		mapsClicked()
+		mapsClicked();
 	}
 }
 
 function checkForLiving() {
-	let badGuy = document.getElementById("badGuyName").innerText
-	return badGuy.substring(0,6) === 'Living'
+	let badGuy = document.getElementById("badGuyName").innerText;
+	return badGuy.substring(0,6) === 'Living';
 }
 
 function guiLoop() {
