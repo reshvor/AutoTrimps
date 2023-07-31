@@ -369,6 +369,9 @@ function mainLoop() {
 }
 
 function lifeLoop() {
+    if (game.global.preMapsActive === true) {
+        return;
+    }
     if (game.global.challengeActive != 'Life') {
         return;
     }
