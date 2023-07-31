@@ -378,7 +378,7 @@ function lifeLoop() {
         }
     }
 
-    if (game.challenges.Life.stacks > 100) {
+    if (game.challenges.Life.stacks > 100 && game.global.world < 100) {
         return;
     }
 	let weak = false;
