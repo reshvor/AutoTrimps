@@ -369,6 +369,9 @@ function mainLoop() {
 }
 
 function lifeLoop() {
+    if (game.global.challengeActive != 'Life') {
+        return;
+    }
     if (game.global.world === 110) {
         if (document.getElementById('cell18').classList.contains('cellColorCurrent')) {
             return;
