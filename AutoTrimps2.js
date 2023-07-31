@@ -368,7 +368,18 @@ function mainLoop() {
     }
 }
 
+
+var lifeCount = -1;
+
 function lifeLoop() {
+    if (lifeCount > 200) {
+        lifeCount = -1;
+    }
+
+    if (lifeCount != -1) {
+        lifeCount++;
+        return;
+    }
     if (game.global.preMapsActive === true) {
         return;
     }
@@ -391,6 +402,7 @@ function lifeLoop() {
 	if(typeof calcHDratio !== 'undefined') weak = calcHDratio() > 1;
 	if(checkForLiving() && weak) {
 		mapsClicked();
+        lifeCount = 0;
 	}
 }
 
