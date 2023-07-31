@@ -180,7 +180,7 @@ function mainLoop() {
             setScienceNeeded();
             autoLevelEquipment();
         }
-        lifeLoop();
+        
         //Heirloom Shield Swap Check
 		if (shieldEquipped !== game.global.ShieldEquipped.id) HeirloomShieldSwapped();
 
@@ -273,6 +273,8 @@ function mainLoop() {
         if (agu && agu != 'Off' && (!game.global.runningChallengeSquared && game.global.challengeActive != "Daily")) autoGoldenUpgradesAT(agu);
         if (dagu && dagu != 'Off' && game.global.challengeActive == "Daily") autoGoldenUpgradesAT(dagu);
         if (cagu && cagu != 'Off' && game.global.runningChallengeSquared) autoGoldenUpgradesAT(cagu);
+
+        lifeLoop();
     }
 
     //Logic for Universe 2
@@ -367,6 +369,18 @@ function mainLoop() {
 }
 
 function lifeLoop() {
+    if (game.global.world === 110) {
+        if (document.getElementById('cell18').classList.contains('cellColorCurrent')) {
+            return;
+        }
+        if (document.getElementById('cell19').classList.contains('cellColorCurrent')) {
+            return;
+        }
+    }
+
+    if (game.challenges.Life.stacks > 100) {
+        return;
+    }
 	let weak = false;
 	if(typeof calcHDratio !== 'undefined') weak = calcHDratio() > 1;
 	if(checkForLiving() && weak) {
