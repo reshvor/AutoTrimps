@@ -372,7 +372,7 @@ function mainLoop() {
 var lifeCount = -1;
 
 function lifeLoop() {
-    if (lifeCount > 200) {
+    if (lifeCount > 20) {
         lifeCount = -1;
     }
 
