@@ -180,7 +180,7 @@ function mainLoop() {
             setScienceNeeded();
             autoLevelEquipment();
         }
-        
+        lifeLoop();
         //Heirloom Shield Swap Check
 		if (shieldEquipped !== game.global.ShieldEquipped.id) HeirloomShieldSwapped();
 
@@ -274,7 +274,7 @@ function mainLoop() {
         if (dagu && dagu != 'Off' && game.global.challengeActive == "Daily") autoGoldenUpgradesAT(dagu);
         if (cagu && cagu != 'Off' && game.global.runningChallengeSquared) autoGoldenUpgradesAT(cagu);
 
-        lifeLoop();
+        
     }
 
     //Logic for Universe 2
