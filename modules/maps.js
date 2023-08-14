@@ -165,22 +165,22 @@ function autoMap() {
     var voidMapLevelSetting = 0;
     var voidMapLevelSettingCell;
     var voidMapLevelPlus = 0;
-    if (game.global.challengeActive != "Daily1") {
+    if (game.global.challengeActive != "Daily") {
         voidMapLevelSettingCell = ((getPageSetting('voidscell') > 0) ? getPageSetting('voidscell') : 70);
     }
-    if (game.global.challengeActive == "Daily1") {
+    if (game.global.challengeActive == "Daily") {
         voidMapLevelSettingCell = ((getPageSetting('dvoidscell') > 0) ? getPageSetting('dvoidscell') : 70);
     }
-    if (game.global.challengeActive != "Daily1" && getPageSetting('VoidMaps') > 0) {
+    if (game.global.challengeActive != "Daily" && getPageSetting('VoidMaps') > 0) {
         voidMapLevelSetting = getPageSetting('VoidMaps');
     }
-    if (game.global.challengeActive == "Daily1" && getPageSetting('DailyVoidMod') >= 1) {
+    if (game.global.challengeActive == "Daily" && getPageSetting('DailyVoidMod') >= 1) {
         voidMapLevelSetting = getPageSetting('DailyVoidMod');
     }
-    if (getPageSetting('RunNewVoidsUntilNew') != 0 && game.global.challengeActive != "Daily1") {
+    if (getPageSetting('RunNewVoidsUntilNew') != 0 && game.global.challengeActive != "Daily") {
         voidMapLevelPlus = getPageSetting('RunNewVoidsUntilNew');
     }
-    if (getPageSetting('dRunNewVoidsUntilNew') != 0 && game.global.challengeActive == "Daily1") {
+    if (getPageSetting('dRunNewVoidsUntilNew') != 0 && game.global.challengeActive == "Daily") {
         voidMapLevelPlus = getPageSetting('dRunNewVoidsUntilNew');
     }
 

@@ -244,6 +244,11 @@ function survive(formation = "S", critPower = 2, ignoreArmy) {
 function autoStance() {
     calcBaseDamageInX();
 
+    if (game.global.world < getPageSetting("VoidMaps"))
+        preVoidHeirloom();
+    else
+        postVoidHeirloom();
+
     //Invalid Map - Dead Soldiers - Auto Stance Disabled - Formations Unavailable - No Enemy
     if (game.global.soldierHealth <= 0) return;
     if (game.global.gridArray.length === 0) return true;

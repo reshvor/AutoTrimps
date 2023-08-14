@@ -197,10 +197,14 @@ if (!hybrid && beforefuelstate == 2) {
       return;
   if (getPageSetting('fuellater') < 1 && game.global.generatorMode != beforefuelstate) {
       if (getPageSetting('fuelend') == 999) {
-        if (game.global.magmaFuel >= 3.7)
+        if (game.global.magmaFuel >= 3.7) {
             changeGeneratorState(0);
-        else
+            beforefuelstate = 0;
+        }
+        else {
             changeGeneratorState(1);
+            beforefuelstate = 1;
+        }
       } else {
             changeGeneratorState(beforefuelstate);
       }
