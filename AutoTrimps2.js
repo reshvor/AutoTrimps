@@ -1,4 +1,4 @@
-// Version 3
+// Version 4
 var ATversion = 'Zek v5.1.0',
     atscript = document.getElementById('AutoTrimps-script'),
     basepath = 'https://reshvor.github.io/AutoTrimps/', //Link to your own Github here if you forked!
