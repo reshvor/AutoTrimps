@@ -110,7 +110,14 @@ function createTabContents(a, b) {
 }
 
 function toggleTab(a, b) {
-    -1 < a.currentTarget.className.indexOf(" active") ? (document.getElementById(b).style.display = "none", a.currentTarget.className = a.currentTarget.className.replace(" active", "")) : (document.getElementById(b).style.display = "block", a.currentTarget.className += " active")
+    if (a.currentTarget.className.indexOf(" active") > -1) {
+        return;
+    } else {
+        minimizeAllTabs();
+        document.getElementById(b).style.display = "block";
+        a.currentTarget.className += " active";
+    }
+    //-1 < a.currentTarget.className.indexOf(" active") ? (document.getElementById(b).style.display = "none", a.currentTarget.className = a.currentTarget.className.replace(" active", "")) : (document.getElementById(b).style.display = "block", a.currentTarget.className += " active")
 }
 
 function minimizeAllTabs() {
