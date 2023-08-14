@@ -982,8 +982,8 @@ function RautoMap() {
     );
 
     var voidArrayDoneS = [];
-    //if (game.global.challengeActive != "Daily" && getPageSetting('Ronlystackedvoids') == true) {
-    if (getPageSetting('Ronlystackedvoids') == true) {
+    if (game.global.challengeActive != "Daily" && getPageSetting('Ronlystackedvoids') == true) {
+    //if (getPageSetting('Ronlystackedvoids') == true) {
         for (var mapz in game.global.mapsOwnedArray) {
             var theMapz = game.global.mapsOwnedArray[mapz];
             if (theMapz.location == 'Void' && theMapz.stacked > 0) {
@@ -996,8 +996,8 @@ function RautoMap() {
         (game.global.totalVoidMaps <= 0) ||
         (!RneedToVoid) ||
         (getPageSetting('Rnovmsc2') == true && game.global.runningChallengeSquared) ||
-        (game.global.totalVoidMaps > 0 && getPageSetting('Ronlystackedvoids') == true && voidArrayDoneS.length < 1)
-        //(game.global.challengeActive != "Daily" && game.global.totalVoidMaps > 0 && getPageSetting('Ronlystackedvoids') == true && voidArrayDoneS.length < 1)
+        //(game.global.totalVoidMaps > 0 && getPageSetting('Ronlystackedvoids') == true && voidArrayDoneS.length < 1)
+        (game.global.challengeActive != "Daily" && game.global.totalVoidMaps > 0 && getPageSetting('Ronlystackedvoids') == true && voidArrayDoneS.length < 1)
     ) {
         RdoVoids = false;
     }
