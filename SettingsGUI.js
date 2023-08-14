@@ -637,7 +637,10 @@ function initializeAllSettings() {
     createSetting('automapsportal', 'AM Portal', 'Makes sure Auto Maps is on on portal. ', 'boolean', false, null, 'Maps');
     createSetting('automapsalways', 'AM Always', 'Makes sure Auto Maps is on always. ', 'boolean', false, null, 'Maps');
     document.getElementById('automapsportal').parentNode.insertAdjacentHTML('afterend', '<br>');
-
+    // Heirlooms for void 
+    createSetting('prevoidshield', 'Pre Void Shield', '<b>VOID CHANCE HEIRLOOM</b><br><br>Enter the name of void chance heirloom. This is your heirloom that you will use before running void maps. ', 'textValue', 'undefined', null, 'Maps');
+    createSetting('postvoidshield', 'Post Void Shield', '<b>POST VOID HEIRLOOM</b><br><br>Enter the name of your post void heirloom. This is the heirloom that you will use when you start to run your void maps. ', 'textValue', 'undefined', null, 'Maps');
+    document.getElementById('automapsportal').parentNode.insertAdjacentHTML('afterend', '<br>');
     //Line 2
     createSetting('DynamicSiphonology', 'Dynamic Siphonology', 'Recommended Always ON. Use the right level of siphonology based on your damage output. IE: Only uses  siphonology if you are weak. With this OFF it means it ALWAYS uses the lowest siphonology map you can create. Siphonology is a perk you get at level 115-125ish, and means you receive map bonus stacks for running maps below your current zone - Up to 3 zones below (1 per perk level).', 'boolean', true, null, 'Maps');
     createSetting('PreferMetal', 'Prefer Metal Maps', 'Always prefer metal maps, intended for manual use, such as pre-spire farming. Remember to turn it back off after you\'re done farming!', 'boolean', false, null, 'Maps');
@@ -675,6 +678,8 @@ function initializeAllSettings() {
     createSetting('Hshrinecell', 'AutoShrine: Cell', 'cell', 'multiValue', [-1], null, 'Maps');
     createSetting('Hshrineamount', 'AutoShrine: Amount', 'amount', 'multiValue', [-1], null, 'Maps');
     createSetting('Hshrinecharge', 'AutoShrine: Charge', 'charge count you will never see this setting hehehehe', 'value', 0, null, 'Maps');
+
+    
 
     //RMaps
 
