@@ -14,7 +14,7 @@ function ATscriptLoad(pathname, modulename) {
     document.head.appendChild(script);
 }
 
-var atscriptversion = "resh2";
+var atscriptversion = "resh3";
 
 function ATscriptUnload(a) {
     var b = document.getElementById(a + "_MODULE");
