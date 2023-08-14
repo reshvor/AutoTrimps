@@ -195,8 +195,16 @@ if (!hybrid && beforefuelstate == 2) {
       changeGeneratorState(2);
   if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 2 && game.global.generatorMode == 2)
       return;
-  if (getPageSetting('fuellater') < 1 && game.global.generatorMode != beforefuelstate)   
-      changeGeneratorState(beforefuelstate);
+  if (getPageSetting('fuellater') < 1 && game.global.generatorMode != beforefuelstate) {
+      if (getPageSetting('fuelend') == 999) {
+        if (game.global.magmaFuel >= 3.7)
+            changeGeneratorState(0);
+        else
+            changeGeneratorState(1);
+      } else {
+            changeGeneratorState(beforefuelstate);
+      }
+  }
   if (getPageSetting('fuellater') < 1 && game.global.generatorMode == beforefuelstate)
       return;
   if (getPageSetting('fuellater') >= 1 && game.global.world < getPageSetting('fuellater') && game.global.generatorMode != beforefuelstate)
