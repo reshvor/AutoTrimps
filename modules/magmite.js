@@ -29,10 +29,10 @@ function miRatio() {
 
     var total = (eff + cap + sup + oc);
 
-    effr = (eff > 0) ? ((eff / total)*100) : 1;
-    capr = (cap > 0) ? ((cap / total)*100) : 1;
-    supr = (sup > 0) ? ((sup / total)*100) : 1;
-    ocr = (oc > 0) ? ((oc / total)*100) : 1;
+    effr = (eff > 0) ? ((eff / total) * 100) : 1;
+    capr = (cap > 0) ? ((cap / total) * 100) : 1;
+    supr = (sup > 0) ? ((sup / total) * 100) : 1;
+    ocr = (oc > 0) ? ((oc / total) * 100) : 1;
 
     //Find Player ratio
     effspend = (getPageSetting('effratio') > 0) ? getPageSetting('effratio') : 0;
@@ -42,11 +42,11 @@ function miRatio() {
 
     var totalspend = (effspend + capspend + supspend + ocspend);
 
-    effspendr = (effspend > 0) ? ((totalspend / effspend)*100) : 0;
-    capspendr = (capspend > 0) ? ((totalspend / capspend)*100) : 0;
-    supspendr = (supspend > 0) ? ((totalspend / supspend)*100) : 0;
-    ocspendr = (ocspend > 0) ? ((totalspend / ocspend)*100) : 0;
-    
+    effspendr = (effspend > 0) ? ((totalspend / effspend) * 100) : 0;
+    capspendr = (capspend > 0) ? ((totalspend / capspend) * 100) : 0;
+    supspendr = (supspend > 0) ? ((totalspend / supspend) * 100) : 0;
+    ocspendr = (ocspend > 0) ? ((totalspend / ocspend) * 100) : 0;
+
     //Find Next Spend
     var efffinal = effspendr - effr;
     var capfinal = capspendr - capr;
@@ -55,25 +55,25 @@ function miRatio() {
 
     var ratios = [];
     if (efffinal != -1)
-	ratios.push(efffinal);
+        ratios.push(efffinal);
     if (capfinal != -1)
-	ratios.push(capfinal);
+        ratios.push(capfinal);
     if (supfinal != -1)
-	ratios.push(supfinal);
+        ratios.push(supfinal);
     if (ocfinal != -1)
-	ratios.push(ocfinal);
+        ratios.push(ocfinal);
 
-    ratios.sort(function(a, b){return b-a;});
+    ratios.sort(function (a, b) { return b - a; });
 
     //Return Next Spend
     if (ratios[0] == efffinal)
-	return "Efficiency";
+        return "Efficiency";
     if (ratios[0] == capfinal)
-	return "Capacity";
+        return "Capacity";
     if (ratios[0] == supfinal)
-	return "Supply";
+        return "Supply";
     if (ratios[0] == ocfinal)
-	return "Overclocker";
+        return "Overclocker";
 }
 
 function autoMagmiteSpender() {
@@ -140,15 +140,15 @@ function autoMagmiteSpender() {
                         var wall = getPageSetting('SupplyWall');
                         if (!wall)
                             item = (CapObj.cost <= supCost) ?
-                            CapObj.name : "Supply";
+                                CapObj.name : "Supply";
                         else if (wall == 1)
                             item = "Capacity";
                         else if (wall < 0)
                             item = (supCost <= (CapObj.cost * -wall)) ?
-                            "Supply" : "Capacity";
+                                "Supply" : "Capacity";
                         else
                             item = (CapObj.cost <= (supCost * wall)) ?
-                            "Capacity" : "Supply";
+                                "Capacity" : "Supply";
                     }
                     upgrade = game.generatorUpgrades[item];
                     if (game.global.magmite >= upgrade.cost()) {
@@ -169,62 +169,67 @@ function autoMagmiteSpender() {
 }
 
 function autoGenerator() {
-var defaultgenstate = getPageSetting('defaultgen');
-var beforefuelstate = getPageSetting('beforegen');
-var hybrid = game.permanentGeneratorUpgrades.Hybridization.owned;
-if (!hybrid && defaultgenstate == 2) {
-    defaultgenstate = 0;
-}
-if (!hybrid && beforefuelstate == 2) {
-    beforefuelstate = 0;
-}
-  if (game.global.world < 230) return;
-  if (game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 1 && game.global.generatorMode != 1)
-      changeGeneratorState(1);
-  if (game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 1 && game.global.generatorMode == 1)
-      return;
-  if (hybrid && game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 2 && game.global.generatorMode != 2)
-      changeGeneratorState(2);
-  if (game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 2 && game.global.generatorMode == 2)
-      return;
-  if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 1 && game.global.generatorMode != 1)
-      changeGeneratorState(1);
-  if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 1 && game.global.generatorMode == 1)
-      return;
-  if (hybrid && game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 2 && game.global.generatorMode != 2)
-      changeGeneratorState(2);
-  if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 2 && game.global.generatorMode == 2)
-      return;
-  if (getPageSetting('fuellater') < 1) {
-      if (getPageSetting('fuelend') == 999) {
-        if (game.global.magmaFuel >= 3.7) {
-            changeGeneratorState(0);
-            beforefuelstate = 0;
-        }
-        else {
-            changeGeneratorState(1);
-            beforefuelstate = 1;
-        }
-      } else if (game.global.generatorMode != beforefuelstate) {
+    var defaultgenstate = getPageSetting('defaultgen');
+    var beforefuelstate = getPageSetting('beforegen');
+    var currentFuel = game.global.magmaFuel;
+    var maxFuel = getGeneratorFuelCap();
+    var hybrid = game.permanentGeneratorUpgrades.Hybridization.owned;
+    var poorHybrid = false;
+    if (!hybrid && defaultgenstate == 2) {
+        defaultgenstate = 0;
+        poorHybrid = true;
+    }
+    if (!hybrid && beforefuelstate == 2) {
+        beforefuelstate = 0;
+        poorHybrid = true;
+    }
+    if (game.global.world < 230) return;
+    if (game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 1 && game.global.generatorMode != 1)
+        changeGeneratorState(1);
+    if (game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 1 && game.global.generatorMode == 1)
+        return;
+    if (hybrid && game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 2 && game.global.generatorMode != 2)
+        changeGeneratorState(2);
+    if (game.global.dailyChallenge.seed && getPageSetting('AutoGenDC') == 2 && game.global.generatorMode == 2)
+        return;
+    if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 1 && game.global.generatorMode != 1)
+        changeGeneratorState(1);
+    if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 1 && game.global.generatorMode == 1)
+        return;
+    if (hybrid && game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 2 && game.global.generatorMode != 2)
+        changeGeneratorState(2);
+    if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 2 && game.global.generatorMode == 2)
+        return;
+    if (getPageSetting('fuellater') < 1) {
+        if (poorHybrid) {
+            if (currentFuel >= maxFuel) {
+                changeGeneratorState(0);
+                beforefuelstate = 0;
+            }
+            else {
+                changeGeneratorState(1);
+                beforefuelstate = 1;
+            }
+        } else if (game.global.generatorMode != beforefuelstate) {
             changeGeneratorState(beforefuelstate);
-      }
-  }
-  if (getPageSetting('fuellater') < 1 && game.global.generatorMode == beforefuelstate)
-      return;
-  if (getPageSetting('fuellater') >= 1 && game.global.world < getPageSetting('fuellater') && game.global.generatorMode != beforefuelstate)
-      changeGeneratorState(beforefuelstate);
-  if (getPageSetting('fuellater') >= 1 && game.global.world < getPageSetting('fuellater') && game.global.generatorMode == beforefuelstate)
-      return;
-  if (getPageSetting('fuellater') >= 1 && game.global.world >= getPageSetting('fuellater') && game.global.world < getPageSetting('fuelend') && game.global.generatorMode != 1)
-      changeGeneratorState(1);
-  if (getPageSetting('fuellater') >= 1 && game.global.world >= getPageSetting('fuellater') && game.global.world < getPageSetting('fuelend') && game.global.generatorMode == 1)
-      return;
-  if (getPageSetting('fuelend') < 1 && game.global.world >= getPageSetting('fuellater') && game.global.generatorMode != 1)
-      changeGeneratorState(1);
-  if (getPageSetting('fuelend') < 1 && game.global.world >= getPageSetting('fuellater') && game.global.generatorMode == 1)
-      return;
-  if (getPageSetting('fuelend') >= 1 && game.global.world >= getPageSetting('fuelend') && game.global.generatorMode != defaultgenstate)
-      changeGeneratorState(defaultgenstate);
-  if (getPageSetting('fuelend') >= 1 && game.global.world >= getPageSetting('fuelend') && game.global.generatorMode == defaultgenstate)
-      return;
-  }
+        }
+    }
+    if (getPageSetting('fuellater') < 1 && game.global.generatorMode == beforefuelstate)
+        return;
+    if (getPageSetting('fuellater') >= 1 && game.global.world < getPageSetting('fuellater') && game.global.generatorMode != beforefuelstate)
+        changeGeneratorState(beforefuelstate);
+    if (getPageSetting('fuellater') >= 1 && game.global.world < getPageSetting('fuellater') && game.global.generatorMode == beforefuelstate)
+        return;
+    if (getPageSetting('fuellater') >= 1 && game.global.world >= getPageSetting('fuellater') && game.global.world < getPageSetting('fuelend') && game.global.generatorMode != 1)
+        changeGeneratorState(1);
+    if (getPageSetting('fuellater') >= 1 && game.global.world >= getPageSetting('fuellater') && game.global.world < getPageSetting('fuelend') && game.global.generatorMode == 1)
+        return;
+    if (getPageSetting('fuelend') < 1 && game.global.world >= getPageSetting('fuellater') && game.global.generatorMode != 1)
+        changeGeneratorState(1);
+    if (getPageSetting('fuelend') < 1 && game.global.world >= getPageSetting('fuellater') && game.global.generatorMode == 1)
+        return;
+    if (getPageSetting('fuelend') >= 1 && game.global.world >= getPageSetting('fuelend') && game.global.generatorMode != defaultgenstate)
+        changeGeneratorState(defaultgenstate);
+    if (getPageSetting('fuelend') >= 1 && game.global.world >= getPageSetting('fuelend') && game.global.generatorMode == defaultgenstate)
+        return;
+}
