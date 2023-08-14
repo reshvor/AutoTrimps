@@ -195,7 +195,7 @@ if (!hybrid && beforefuelstate == 2) {
       changeGeneratorState(2);
   if (game.global.runningChallengeSquared && getPageSetting('AutoGenC2') == 2 && game.global.generatorMode == 2)
       return;
-  if (getPageSetting('fuellater') < 1 && game.global.generatorMode != beforefuelstate) {
+  if (getPageSetting('fuellater') < 1) {
       if (getPageSetting('fuelend') == 999) {
         if (game.global.magmaFuel >= 3.7) {
             changeGeneratorState(0);
@@ -205,7 +205,7 @@ if (!hybrid && beforefuelstate == 2) {
             changeGeneratorState(1);
             beforefuelstate = 1;
         }
-      } else {
+      } else if (game.global.generatorMode != beforefuelstate) {
             changeGeneratorState(beforefuelstate);
       }
   }
