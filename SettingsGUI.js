@@ -88,7 +88,8 @@ function modifyParentNode(setting, id) {
 function automationMenuSettingsInit() {
     var a = document.getElementById("settingsRow"),
         b = document.createElement("DIV");
-    b.id = "autoSettings", b.setAttribute("style", "display: none; max-height: 92.5vh;overflow: auto;"), b.setAttribute("class", "niceScroll"), a.appendChild(b)
+    //b.id = "autoSettings", b.setAttribute("style", "display: none; max-height: 92.5vh;overflow: auto;"), b.setAttribute("class", "niceScroll"), a.appendChild(b)
+    b.id = "autoSettings", b.setAttribute("style", "display: none; max-height: 92.5vh;overflow: auto;"), b.setAttribute("class", "niceScroll"), a.prepend(b)
 }
 automationMenuSettingsInit();
 var link1 = document.createElement("link");
@@ -213,7 +214,7 @@ function initializeAllTabs() {
     addtabsUL.id = 'autoTrimpsTabBarMenu';
     addtabsUL.style.display = "none";
     var sh = document.getElementById("settingsRow")
-    sh.insertBefore(addtabsUL, sh.childNodes[2]);
+    sh.insertBefore(addtabsUL, sh.childNodes[1]);
     createTabs("Core", "Core - Main Controls for the script");
     createTabs("Buildings", "Building Settings");
     createTabs("Jobs", "Jobs - Worker Settings");
