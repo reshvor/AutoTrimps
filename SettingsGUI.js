@@ -105,7 +105,7 @@ function createTabContents(a, b) {
     var c = document.createElement('div');
     c.className = 'tabcontent', c.id = a;
     var d = document.createElement('div');
-    d.setAttribute('style', 'margin-left: 1vw; margin-right: 1vw;');
+    d.setAttribute('style', 'padding: 0.5vw;margin-bottom: 0.5vw;backgtround:slategray');
     var e = document.createElement('h4');
     e.setAttribute('style', 'font-size: 1.2vw;'), e.appendChild(document.createTextNode(b)), d.appendChild(e), c.appendChild(d), addTabsDiv.appendChild(c)
 }
